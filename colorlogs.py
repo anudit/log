@@ -1,24 +1,28 @@
-import logzero
+import logzero as l0
 
 DEF_STYLE = "SUCCESS"
 
-def log(*msgs,STYLE = DEF_STYLE):
+def log(*msgs, STYLE = DEF_STYLE):
 
     log_format = '%(color)s%(message)s%(end_color)s'
-    formatter = logzero.LogFormatter(fmt=log_format)
-    logzero.setup_default_logger(formatter=formatter)
+    formatter = l0.LogFormatter(fmt=log_format)
+    l0.setup_default_logger(formatter=formatter)
 
-    for msg in msgs:
-        if (STYLE == "GREEN" or STYLE == "SUCCESS"):
-            logzero.logger.info(str(msg))
-        elif (STYLE == "BLUE" or STYLE == "INFO"):
-            logzero.logger.debug(str(msg))
-        elif (STYLE == "YELLOW" or STYLE == "WARNING"):
-            logzero.logger.warning(str(msg))
-        elif (STYLE == "RED" or STYLE == "ERROR"):
-            logzero.logger.error(str(msg))
-        else:
-            logzero.logger.error(str("INVALID TYPE"))
+    msg =""
+    for m in msgs:
+        msg+=m
+
+    if (STYLE == "GREEN" or STYLE == "SUCCESS"):
+        l0.logger.info(str(msg))
+    elif (STYLE == "BLUE" or STYLE == "INFO"):
+        l0.logger.debug(str(msg))
+    elif (STYLE == "YELLOW" or STYLE == "WARNING"):
+        l0.logger.warning(str(msg))
+    elif (STYLE == "RED" or STYLE == "ERROR"):
+        l0.logger.error(str(msg))
+    else:
+        l0.logger.error(str("INVALID TYPE"))
+    print
 
 def setDefaultStyle(STYLE = "SUCCESS"):
     if (STYLE == "GREEN" or STYLE == "SUCCESS"):
